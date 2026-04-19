@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibimintshop - Mobile Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#D9779B',     
+                            main: '#FF9EBB',     
+                            light: '#FFF0F5',    
+                            text: '#4A332A',     
+                            subtext: '#8A6F65'   
+                        }
+                    },
+                    boxShadow: {
+                        'app': '0 -10px 40px -15px rgba(255, 158, 187, 0.15), 0 10px 40px -15px rgba(255, 158, 187, 0.15)',
+                        'nav': '0 -5px 20px -5px rgba(255, 158, 187, 0.2)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FAFAFA;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: #FFF0F5;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            overflow-x: hidden;
+        }
+        .gradient-bg {
+            background: linear-gradient(180deg, #FF8DAF 0%, #FFB6C1 100%);
+        }
+        .stars-bg {
+            background-image: 
+                radial-gradient(circle at 15% 30%, white 1px, transparent 1.5px),
+                radial-gradient(circle at 85% 20%, white 1px, transparent 1.5px),
+                radial-gradient(circle at 30% 60%, white 2px, transparent 2.5px),
+                radial-gradient(circle at 75% 70%, white 1.5px, transparent 2px);
+            background-size: 100% 100%;
+        }
+        .hero-image-placeholder {
+            width: 190px;
+            height: 190px;
+            background-color: white;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 10px 20px rgba(255, 158, 187, 0.4);
+            margin: 0 auto;
+            position: relative;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease-out forwards;
+            padding-bottom: 90px;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #template-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        #template-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #template-list::-webkit-scrollbar-thumb {
+            background: #FF9EBB;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-brand-text font-sans antialiased">
+
+    <div class="app-container flex flex-col">
+        
+        <div id="page-home" class="page active">
+            <div class="gradient-bg pt-10 px-6 pb-24 relative rounded-b-[40px]">
+                <div class="stars-bg absolute inset-0 opacity-40"></div>
+                <div class="flex justify-between items-center mb-6 relative z-10">
+                    <div class="text-brand-text font-outfit text-2xl font-bold tracking-wide flex flex-col brand-title">
+                        BIBIMINTSHOP
+                        <span class="text-xs font-medium tracking-widest text-brand-subtext mt-1">Sticker & Badge Shop</span>
+                    </div>
+                    <div class="relative">
+                        <i class="fa-regular fa-bell text-brand-text text-xl"></i>
+                        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-brand-main rounded-full border-2 border-white"></span>
+                    </div>
+                </div>
+                
+                <div class="text-center mb-2 z-10 relative">
+                    <h1 class="text-lg font-semibold text-brand-text flex justify-center items-center">
+                        Welcome to my shop 
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 inline-block text-white ml-1 drop-shadow-sm"><path d="M12 10.5C11.5 8 9 6 6 6 3 6 2 8 2 10.5 2 13 5 14 8 13.5L10 14.5C9.5 17 8 20 6 21 8.5 21 11 19 12 16 13 19 15.5 21 18 21 16 20 14.5 17 14 14.5L16 13.5C19 14 22 13 22 10.5 22 8 21 6 18 6 15 6 12.5 8 12 10.5Z" /></svg>
+                    </h1>
+                    <p class="text-sm font-medium text-brand-subtext mt-1">แหล่งรวมกลุ่มป้าย และคอร์สสอนรวย</p>
+                </div>
+                
+                <div class="hero-image-placeholder mt-4 mb-[-80px]">
+                    <img src="https://i.postimg.cc/Ssm1y82k/att-wk7qrx-RHAp1Ej-HFxr8ZWJOqko-Id-NEvk-Y6mf5-n2Id-W4.jpg" alt="Bibimintshop Logo" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <div class="bg-white rounded-t-[35px] -mt-16 relative z-10 pt-10 px-5 shadow-app pb-6">
+                
+                <div class="mb-6 mt-12">
+                    <div class="bg-brand-light/50 border border-brand-main/20 rounded-2xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                            <span class="text-xs font-bold text-brand-text">เช็คคิวงาน / สถานะกลุ่ม</span>
+                        </div>
+                        <a href="#" class="text-[10px] border-b border-dashed border-brand-main text-brand-main font-bold">ปุ่มเช็คคิวงาน</a>
+                    </div>
+                </div>
+
+                <div class="text-center mb-4">
+                    <span class="text-brand-main font-semibold text-sm tracking-wide bg-brand-light px-4 py-1.5 rounded-full inline-block border border-brand-main/20">
+                        Fast Menu
+                    </span>
+                </div>
+                
+                <div class="grid grid-cols-4 gap-3 mb-8">
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-website', 1)">
+                        <div class="w-14 h-14 rounded-full bg-brand-light group-hover:bg-[#FFD1E0] flex items-center justify-center text-brand-main text-xl shadow-sm border border-brand-main/10 transition-colors">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <span class="text-[10px] text-center text-brand-text font-medium leading-tight">ตัวอย่าง<br>กลุ่มป้าย</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-goodnotes', 2)">
+                        <div class="w-14 h-14 rounded-full bg-[#F5ECE9] group-hover:bg-[#EFE5E2] flex items-center justify-center text-[#8A6F65] text-xl shadow-sm border border-[#EFE5E2] transition-colors">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                        <span class="text-[10px] text-center text-brand-text font-medium leading-tight">ขั้นตอน<br>การสั่งซื้อ</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-course', -1)">
+                        <div class="w-14 h-14 rounded-full bg-[#EFE5E2] group-hover:bg-[#E0D4CF] flex items-center justify-center text-brand-text text-xl shadow-sm border border-[#E0D4CF] transition-colors">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <span class="text-[10px] text-center text-brand-text font-medium leading-tight">วิธีรันบอท<br>เมื่อเข้ากลุ่ม</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-contact', 3)">
+                        <div class="w-14 h-14 rounded-full bg-brand-light group-hover:bg-[#FFD1E0] flex items-center justify-center text-brand-main text-xl shadow-sm border border-brand-main/10 transition-colors">
+                            <i class="fa-solid fa-percent"></i>
+                        </div>
+                        <span class="text-[10px] text-center text-brand-text font-medium leading-tight">กฎการผ่อน<br>สินค้า</span>
+                    </div>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <div class="border border-brand-light rounded-2xl bg-white shadow-sm overflow-hidden">
+                        <div class="w-full flex justify-between items-center p-4 text-left font-medium text-sm text-brand-text">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-list-ol text-brand-main"></i> วิธีการสั่งซื้อกลุ่มป้าย</span>
+                        </div>
+                        <div class="px-4 py-3 text-sm text-brand-subtext bg-brand-light/40 border-t border-brand-light">
+                            <ul class="space-y-2 list-disc pl-4 pb-2">
+                                <li>เลือกกลุ่มป้ายที่สนใจจากหน้าตัวอย่าง</li>
+                                <li>ทักแชทแจ้งชื่อกลุ่มที่ต้องการเข้าร่วม</li>
+                                <li>ชำระเงินและแจ้งสลิปผ่านช่องทางติดต่อ</li>
+                                <li>รอรับลิงก์เชิญเข้ากลุ่มและรันบอทตามขั้นตอน</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-services" class="page">
+            <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="w-8 h-8 bg-brand-light/80 rounded-full flex items-center justify-center text-brand-main backdrop-blur-md shadow-sm cursor-pointer border border-brand-main/20" onclick="switchTab('page-home', 0)">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                    </div>
+                    <div class="text-brand-text font-outfit text-xl font-bold tracking-wide brand-title">BIBIMINTSHOP</div>
+                    <div class="w-8"></div>
+                </div>
+                <div class="text-center mb-2 z-10 relative">
+                    <h1 class="font-outfit text-sm font-medium text-brand-subtext">Menu</h1>
+                    <div class="text-2xl font-bold mt-1 text-brand-text flex justify-center items-center">
+                        หมวดหมู่ทั้งหมด
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-5 -mt-10 relative z-10 pb-8">
+                <div class="bg-white rounded-[24px] shadow-app p-5 border border-brand-light">
+                    <div class="grid grid-cols-4 gap-y-6 gap-x-2">
+                        <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-website', 1)">
+                            <div class="w-12 h-12 rounded-xl bg-brand-light flex items-center justify-center text-brand-main text-xl shadow-sm border border-brand-light transition-colors"><i class="fa-solid fa-images"></i></div>
+                            <span class="text-[10px] text-center text-brand-text font-medium">กลุ่มป้าย</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-goodnotes', 2)">
+                            <div class="w-12 h-12 rounded-xl bg-[#F5ECE9] flex items-center justify-center text-[#8A6F65] text-xl shadow-sm border border-[#F5ECE9] transition-colors"><i class="fa-solid fa-basket-shopping"></i></div>
+                            <span class="text-[10px] text-center text-brand-text font-medium">สั่งซื้อ</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-course', -1)">
+                            <div class="w-12 h-12 rounded-xl bg-[#EFE5E2] flex items-center justify-center text-brand-text text-xl shadow-sm border border-[#EFE5E2] transition-colors"><i class="fa-solid fa-code"></i></div>
+                            <span class="text-[10px] text-center text-brand-text font-medium">รันบอท</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-contact', 3)">
+                            <div class="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center text-brand-main text-xl shadow-sm border border-brand-main/20 transition-colors"><i class="fa-solid fa-comments"></i></div>
+                            <span class="text-[10px] text-center text-brand-text font-medium">ติดต่อ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="page-website" class="page">
+            <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="w-8 h-8 bg-brand-light/80 rounded-full flex items-center justify-center text-brand-main backdrop-blur-md shadow-sm cursor-pointer border border-brand-main/20" onclick="switchTab('page-home', 0)">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                    </div>
+                    <div class="text-brand-text font-outfit text-xl font-bold tracking-wide brand-title">BIBIMINTSHOP</div>
+                    <div class="w-8"></div>
+                </div>
+                <div class="text-center mb-2 z-10 relative">
+                    <h1 class="font-outfit text-sm font-medium text-brand-subtext">Portfolio</h1>
+                    <div class="text-2xl font-bold mt-1 text-brand-text flex justify-center items-center">
+                        ตัวอย่างกลุ่มป้าย <i class="fa-solid fa-layer-group ml-2 text-white drop-shadow-sm"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="px-5 -mt-10 relative z-10 pb-8 space-y-4">
+                <div class="bg-white rounded-[24px] shadow-app border border-brand-light p-6">
+                    <div class="text-center mb-4">
+                        <span class="bg-brand-light text-brand-main text-[10px] font-bold px-3 py-1 rounded-full border border-brand-main/20">POPULAR <i class="fa-solid fa-fire text-brand-text ml-1"></i></span>
+                        <h3 class="text-lg font-bold text-brand-text mt-3 mb-1">กลุ่มป้ายอเนกประสงค์</h3>
+                        <p class="text-xs text-brand-subtext">รวมป้ายแต่งร้านกว่า 1,000+ แบบ</p>
+                    </div>
+                    <div class="bg-brand-light/20 rounded-xl p-4 border border-brand-light space-y-2 mb-4">
+                        <div class="flex justify-between items-center border-b border-brand-light pb-2">
+                            <span class="text-sm font-medium text-brand-text">เริ่มต้นเพียง</span>
+                            <span class="text-lg font-bold text-brand-main">99.-</span>
+                        </div>
+                        <ul class="text-xs text-brand-subtext space-y-2 pt-2">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-text mt-0.5"></i> อัปเดตงานใหม่ทุกสัปดาห์</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-text mt-0.5"></i> งานชัดระดับ HD โหลดง่าย</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchTab('page-contact', 3)" class="w-full bg-brand-main text-white font-semibold py-3.5 rounded-xl shadow-lg transition-all text-sm flex items-center justify-center gap-2">
+                        ขอดูรีวิวทั้งหมด <i class="fa-regular fa-image"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-goodnotes" class="page">
+            <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="w-8 h-8 bg-brand-light/80 rounded-full flex items-center justify-center text-brand-main backdrop-blur-md shadow-sm cursor-pointer border border-brand-main/20" onclick="switchTab('page-home', 0)">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                    </div>
+                    <div class="text-brand-text font-outfit text-xl font-bold tracking-wide brand-title">BIBIMINTSHOP</div>
+                    <div class="w-8"></div>
+                </div>
+                <div class="text-center mb-2 z-10 relative">
+                    <h1 class="font-outfit text-sm font-medium text-brand-subtext">How to Order</h1>
+                    <div class="text-2xl font-bold mt-1 text-brand-text flex justify-center items-center">
+                        ขั้นตอนการสั่งซื้อ <i class="fa-solid fa-cart-shopping ml-2 text-white drop-shadow-sm"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-5 -mt-10 relative z-10 pb-8 space-y-4">
+                <div class="bg-white rounded-[24px] shadow-app border border-brand-light p-5">
+                    <div class="space-y-3">
+                        <div class="border border-brand-light rounded-xl p-4 flex items-center gap-4 bg-white hover:bg-brand-light/30 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-brand-main text-white flex items-center justify-center font-bold">1</div>
+                            <div class="text-sm font-bold text-brand-text">เลือกกลุ่มที่ต้องการเข้า</div>
+                        </div>
+                        <div class="border border-brand-light rounded-xl p-4 flex items-center gap-4 bg-white hover:bg-brand-light/30 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-brand-main text-white flex items-center justify-center font-bold">2</div>
+                            <div class="text-sm font-bold text-brand-text">ทักแชทแจ้งยอด/โอนเงิน</div>
+                        </div>
+                        <div class="border border-brand-light rounded-xl p-4 flex items-center gap-4 bg-white hover:bg-brand-light/30 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-brand-main text-white flex items-center justify-center font-bold">3</div>
+                            <div class="text-sm font-bold text-brand-text">รับลิงก์และรันบอท</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-course" class="page">
+            <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="w-8 h-8 bg-brand-light/80 rounded-full flex items-center justify-center text-brand-main backdrop-blur-md shadow-sm cursor-pointer border border-brand-main/20" onclick="switchTab('page-home', 0)">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                    </div>
+                    <div class="text-brand-text font-outfit text-xl font-bold tracking-wide brand-title">BIBIMINTSHOP</div>
+                    <div class="w-8"></div>
+                </div>
+                <div class="text-center mb-2 z-10 relative">
+                    <h1 class="font-outfit text-sm font-medium text-brand-subtext">Bot Tutorial</h1>
+                    <div class="text-2xl font-bold mt-1 text-brand-text flex justify-center items-center">
+                        วิธีรันบอทเมื่อเข้ากลุ่ม <i class="fa-solid fa-robot ml-2 text-white drop-shadow-sm"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="px-5 -mt-10 relative z-10 pb-8">
+                <div class="bg-white rounded-[24px] shadow-app border border-brand-light p-6">
+                    <h3 class="font-bold text-brand-text mb-4 text-center">ทำตามขั้นตอนง่ายๆ ดังนี้</h3>
+                    <div class="bg-[#F5ECE9]/30 rounded-xl p-4 border border-[#EFE5E2] space-y-4">
+                        <p class="text-xs leading-relaxed">1. กดลิงก์เชิญเข้ากลุ่มที่ได้รับจากทางร้าน<br>2. พิมพ์คำสั่ง <span class="text-brand-main font-bold">/start</span> ในแชทกลุ่ม<br>3. กดยืนยันตัวตนตามที่บอทแจ้ง<br>4. เริ่มดาวน์โหลดไฟล์ป้ายได้ทันที!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-contact" class="page">
+            <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="w-8 h-8 bg-brand-light/80 rounded-full flex items-center justify-center text-brand-main backdrop-blur-md shadow-sm cursor-pointer border border-brand-main/20" onclick="switchTab('page-home', 0)">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                    </div>
+                    <div class="text-brand-text font-outfit text-xl font-bold tracking-wide brand-title">BIBIMINTSHOP</div>
+                    <div class="w-8"></div>
+                </div>
+                <div class="text-center mb-2 z-10 relative">
+                    <h1 class="font-outfit text-sm font-medium text-brand-subtext">Terms & Contact</h1>
+                    <div class="text-2xl font-bold mt-1 text-brand-text flex justify-center items-center">
+                        กฎการผ่อน & ติดต่อ
+                    </div>
+                </div>
+            </div>
+            <div class="px-5 -mt-10 relative z-10 pb-8 space-y-4">
+                <div class="bg-white rounded-[24px] shadow-app border border-brand-light p-5">
+                    <h3 class="text-sm font-bold text-brand-text mb-3"><i class="fa-solid fa-percent mr-2"></i> กฎการผ่อนสินค้า</h3>
+                    <ul class="text-[11px] text-brand-subtext space-y-2 mb-4">
+                        <li>- เริ่มต้นผ่อนเพียง 20.- เท่านั้น</li>
+                        <li>- ผ่อนครบรับลิงก์เข้ากลุ่มทันที</li>
+                        <li>- ยกเลิกการผ่อน ไม่คืนเงินทุกกรณี</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-[24px] shadow-app border border-brand-light p-8 flex justify-center gap-8">
+                    <a href="#" class="flex flex-col items-center gap-2"><i class="fa-brands fa-facebook text-3xl text-blue-600"></i><span class="text-[10px]">Facebook</span></a>
+                    <a href="#" class="flex flex-col items-center gap-2"><i class="fa-brands fa-line text-3xl text-green-500"></i><span class="text-[10px]">Line</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-brand-light px-6 py-3 z-50 shadow-nav max-w-[430px] mx-auto rounded-t-3xl">
+            <div class="flex justify-between items-end pb-2">
+                <div class="flex flex-col items-center gap-1 cursor-pointer w-1/4 text-brand-main" onclick="switchTab('page-home', 0)" id="nav-item-0">
+                    <i class="fa-solid fa-house text-xl mb-0.5"></i>
+                    <span class="text-[9px] font-semibold">หน้าแรก</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 cursor-pointer w-1/4 text-brand-subtext" onclick="switchTab('page-website', 1)" id="nav-item-1">
+                    <i class="fa-solid fa-layer-group text-xl mb-0.5"></i>
+                    <span class="text-[9px] font-medium">กลุ่มป้าย</span>
+                </div>
+                <div class="relative w-1/4 flex justify-center" onclick="switchTab('page-services', -1)">
+                    <div class="absolute -top-10 w-14 h-14 bg-gradient-to-tr from-brand-main to-pink-300 rounded-full flex items-center justify-center text-white text-2xl shadow-lg border-4 border-white cursor-pointer transition-transform">
+                        <i class="fa-solid fa-shop"></i>
+                    </div>
+                    <span class="text-[9px] font-bold text-brand-main mt-5">Bibimint</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 cursor-pointer w-1/4 text-brand-subtext" onclick="switchTab('page-goodnotes', 2)" id="nav-item-2">
+                    <i class="fa-solid fa-cart-shopping text-xl mb-0.5"></i>
+                    <span class="text-[9px] font-medium">สั่งซื้อ</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 cursor-pointer w-1/4 text-brand-subtext" onclick="switchTab('page-contact', 3)" id="nav-item-3">
+                    <i class="fa-regular fa-comment-dots text-xl mb-0.5"></i>
+                    <span class="text-[9px] font-medium">ติดต่อ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(pageId, navIndex) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+            for (let i = 0; i <= 3; i++) {
+                const item = document.getElementById(`nav-item-${i}`);
+                if (item) {
+                    item.classList.remove('text-brand-main', 'text-brand-subtext');
+                    item.classList.add(i === navIndex ? 'text-brand-main' : 'text-brand-subtext');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
