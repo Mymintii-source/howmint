@@ -19,17 +19,13 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#0EA5E9',     /* ฟ้าเข้ม */
-                            main: '#38BDF8',     /* ฟ้าหลัก */
-                            light: '#F0F9FF',    /* ฟ้าอ่อนมาก */
-                            accent: '#FDE047',   /* เหลือง */
-                            text: '#0C4A6E',     /* น้ำเงินเข้ม */
-                            subtext: '#334155'   /* เทาเข้ม */
+                            dark: '#0EA5E9',
+                            main: '#38BDF8',
+                            light: '#F0F9FF',
+                            accent: '#FDE047',
+                            text: '#0C4A6E',
+                            subtext: '#334155'
                         }
-                    },
-                    boxShadow: {
-                        'app': '0 -10px 40px -15px rgba(56, 189, 248, 0.2), 0 10px 40px -15px rgba(56, 189, 248, 0.2)',
-                        'nav': '0 -5px 20px -5px rgba(56, 189, 248, 0.3)'
                     }
                 }
             }
@@ -43,9 +39,51 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.05); overflow-x: hidden;
         }
         .gradient-bg { background: linear-gradient(180deg, #38BDF8 0%, #7DD3FC 100%); }
+        
+        /* กรอบไฟวิ่งรอบช้าๆ */
+        .neon-border {
+            position: relative;
+            z-index: 1;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            padding: 3px; /* ความหนาของไฟ */
+        }
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            left: -50%;
+            top: -50%;
+            width: 200%;
+            height: 200%;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-size: 50% 50%, 50% 50%;
+            background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+            background-image: linear-gradient(#FDE047, #FDE047), linear-gradient(#38BDF8, #38BDF8), linear-gradient(#FDE047, #FDE047), linear-gradient(#38BDF8, #38BDF8);
+            animation: rotate 6s linear infinite; /* หมุนรอบช้าๆ */
+        }
+        .neon-content {
+            background: white;
+            border-radius: 21px;
+            height: 100%;
+        }
+        @keyframes rotate {
+            100% { transform: rotate(1turn); }
+        }
+
+        /* สติกเกอร์ลอยๆ */
+        .sticker { position: absolute; pointer-events: none; z-index: 30; filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1)); }
+        .float-anim { animation: floating 3s ease-in-out infinite; }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
         .hero-image-placeholder {
             width: 190px; height: 190px; background-color: white;
-            border-radius: 50%; border: 4px solid #FDE047; /* ขอบเหลือง */
+            border-radius: 50%; border: 4px solid #FDE047;
             box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
             margin: 0 auto; position: relative; z-index: 20;
             display: flex; align-items: center; justify-content: center; overflow: hidden;
@@ -61,7 +99,9 @@
         
         <div id="page-home" class="page active">
             <div class="gradient-bg pt-10 px-6 pb-24 relative rounded-b-[40px]">
-                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#FDE047 1px, transparent 1px); background-size: 20px 20px;"></div>
+                <div class="sticker float-anim top-10 left-5 text-2xl">✨</div>
+                <div class="sticker float-anim top-32 right-10 text-xl" style="animation-delay: 1s;">🌈</div>
+                
                 <div class="flex justify-between items-center mb-6 relative z-10">
                     <div class="text-white font-outfit text-2xl font-bold tracking-wide flex flex-col">
                         BIBIMINTSHOP
@@ -69,13 +109,12 @@
                     </div>
                     <div class="bg-white/20 p-2 rounded-full relative">
                         <i class="fa-regular fa-bell text-white text-xl"></i>
-                        <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-brand-accent rounded-full border-2 border-brand-main"></span>
                     </div>
                 </div>
                 
                 <div class="text-center mb-2 z-10 relative">
                     <h1 class="text-lg font-semibold text-white flex justify-center items-center gap-2">
-                        Welcome to my shop <i class="fa-solid fa-star text-brand-accent"></i>
+                        Welcome to my shop <span class="text-brand-accent">✿</span>
                     </h1>
                     <p class="text-sm font-medium text-white/90 mt-1">แหล่งรวมกลุ่มป้าย และคอร์สสอนรวย</p>
                 </div>
@@ -85,62 +124,54 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-t-[35px] -mt-16 relative z-10 pt-10 px-5 shadow-app pb-6">
-                <div class="mb-6 mt-12">
-                    <div class="bg-brand-light border border-brand-main/30 rounded-2xl p-4 flex items-center justify-between">
+            <div class="bg-white rounded-t-[35px] -mt-16 relative z-10 pt-10 px-5 pb-6">
+                <div class="mb-8 mt-12 px-2">
+                    <div class="border-2 border-brand-main bg-white rounded-xl p-4 flex items-center justify-between shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-1 bg-brand-main text-white text-[8px] px-2 rounded-bl-lg font-bold">STATUS</div>
                         <div class="flex items-center gap-3">
-                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span class="text-xs font-bold text-brand-text">เช็คคิวงาน / สถานะรอมิ้นดึงกลุ่ม</span>
+                            <div class="relative">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-brand-text uppercase tracking-tighter">สถานะเปิดร้าน : มิ้นพร้อมรับยอด</h4>
+                                <p class="text-[9px] text-brand-subtext">รอมิ้นดึงเข้ากลุ่ม ภายใน 3-10 นาทีค่ะ</p>
+                            </div>
                         </div>
-                        <a href="#" class="text-[10px] border-b border-dashed border-brand-main text-brand-main font-bold">ปุ่มเช็คคิวงาน</a>
+                        <i class="fa-solid fa-store text-brand-main text-xl"></i>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-4 gap-3 mb-8">
                     <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-website', 1)">
-                        <div class="w-14 h-14 rounded-full bg-brand-light group-hover:bg-brand-accent flex items-center justify-center text-brand-main group-hover:text-brand-text text-xl shadow-sm border border-brand-main/10 transition-all">
-                            <i class="fa-solid fa-images"></i>
-                        </div>
-                        <span class="text-[10px] text-center text-brand-text font-medium leading-tight">กลุ่มป้าย</span>
+                        <div class="w-14 h-14 rounded-full bg-brand-light flex items-center justify-center text-brand-main text-xl border border-brand-main/10 shadow-sm"><i class="fa-solid fa-images"></i></div>
+                        <span class="text-[10px] text-center font-medium">กลุ่มป้าย</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-goodnotes', 2)">
-                        <div class="w-14 h-14 rounded-full bg-brand-accent/20 group-hover:bg-brand-accent flex items-center justify-center text-brand-text text-xl shadow-sm border border-brand-accent/30 transition-all">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </div>
-                        <span class="text-[10px] text-center text-brand-text font-medium leading-tight">วิธีสั่งซื้อ</span>
+                        <div class="w-14 h-14 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-text text-xl border border-brand-accent/30 shadow-sm"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <span class="text-[10px] text-center font-medium">วิธีสั่งซื้อ</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-course', -1)">
-                        <div class="w-14 h-14 rounded-full bg-brand-light group-hover:bg-brand-accent flex items-center justify-center text-brand-main group-hover:text-brand-text text-xl shadow-sm border border-brand-main/10 transition-all">
-                            <i class="fa-solid fa-robot"></i>
-                        </div>
-                        <span class="text-[10px] text-center text-brand-text font-medium leading-tight">วิธีรันบอท</span>
+                        <div class="w-14 h-14 rounded-full bg-brand-light flex items-center justify-center text-brand-main text-xl border border-brand-main/10 shadow-sm"><i class="fa-solid fa-robot"></i></div>
+                        <span class="text-[10px] text-center font-medium">วิธีรันบอท</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-contact', 3)">
-                        <div class="w-14 h-14 rounded-full bg-brand-accent/20 group-hover:bg-brand-accent flex items-center justify-center text-brand-text text-xl shadow-sm border border-brand-accent/30 transition-all">
-                            <i class="fa-solid fa-percent"></i>
-                        </div>
-                        <span class="text-[10px] text-center text-brand-text font-medium leading-tight">กฎการผ่อน</span>
+                        <div class="w-14 h-14 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-text text-xl border border-brand-accent/30 shadow-sm"><i class="fa-solid fa-percent"></i></div>
+                        <span class="text-[10px] text-center font-medium">กฎการผ่อน</span>
                     </div>
                 </div>
 
-                <div class="space-y-3 mb-8">
-                    <div class="border-2 border-brand-accent rounded-2xl bg-white shadow-sm overflow-hidden">
-                        <div class="w-full flex justify-between items-center p-4 text-left font-bold text-sm text-brand-text bg-brand-accent/10">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-circle-exclamation text-brand-main"></i> เงื่อนไขสำคัญที่ต้องมี</span>
-                        </div>
-                        <div class="px-4 py-3 text-sm text-brand-subtext">
-                            <ul class="space-y-2">
-                                <li class="flex items-center gap-2"><i class="fa-brands fa-line text-green-500"></i> แอพพลิเคชั่น ไลน์ (Line)</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-red-500"></i> Gmail สำหรับใช้รับงานในกลุ่ม</li>
-                            </ul>
-                        </div>
+                <div class="neon-border mb-6">
+                    <div class="neon-content p-4 text-center">
+                        <span class="text-[10px] font-bold text-brand-main uppercase tracking-widest">Bibimint แนะนำ</span>
+                        <p class="text-xs text-brand-subtext mt-1 italic">"ตัดสินใจให้ดีก่อนเปิดผ่อน มิ้นใจดีแต่ขอยึดตามกฎนะคะ"</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div id="page-website" class="page">
+        <div id="page-contact" class="page">
             <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
+                <div class="sticker float-anim top-5 right-5 text-2xl">🧸</div>
                 <div class="flex justify-between items-center mb-6">
                     <div class="w-8 h-8 bg-white/30 rounded-full flex items-center justify-center text-white cursor-pointer" onclick="switchTab('page-home', 0)">
                         <i class="fa-solid fa-chevron-left text-sm"></i>
@@ -150,128 +181,55 @@
                 </div>
                 <div class="text-center z-10 relative">
                     <h1 class="text-2xl font-bold text-white flex justify-center items-center gap-2">
-                        ตัวอย่างกลุ่มป้าย <i class="fa-solid fa-layer-group text-brand-accent"></i>
+                        กฎการผ่อนกลุ่ม <i class="fa-solid fa-heart text-brand-accent"></i>
                     </h1>
                 </div>
             </div>
-            <div class="px-5 -mt-10 relative z-10 pb-8 space-y-4">
-                <div class="bg-white rounded-[24px] shadow-app border border-brand-main/20 p-6 text-center">
-                    <span class="bg-brand-accent text-brand-text text-[10px] font-bold px-3 py-1 rounded-full">PRICE LIST</span>
-                    <h3 class="text-lg font-bold text-brand-text mt-3 mb-1">ราคาเริ่มต้น 5 - 2,000 บาท</h3>
-                    <p class="text-xs text-brand-subtext leading-relaxed px-2">
-                        แต่ละกลุ่มราคาต่างกันนะคะ เลือกดูและส่องตัวอย่างได้เลย <br>
-                        <span class="text-brand-main font-bold">บางกลุ่มอาจจะอัพราคา สอบถามร้านก่อนได้ค่ะ</span>
-                    </p>
-                    <div class="mt-6">
-                        <a href="https://linkbio.co/bibimintshop" target="_blank" class="w-full bg-brand-main hover:bg-brand-dark text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all">
-                            <i class="fa-solid fa-eye"></i> จิ้มเพื่อส่องตัวอย่างกลุ่ม
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="page-goodnotes" class="page">
-            <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
-                <div class="text-center z-10 relative">
-                    <h1 class="text-2xl font-bold text-white flex justify-center items-center gap-2">
-                        ขั้นตอนการสั่งซื้อ <i class="fa-solid fa-cart-shopping text-brand-accent"></i>
-                    </h1>
-                </div>
-            </div>
-            <div class="px-5 -mt-10 relative z-10 pb-8">
-                <div class="bg-white rounded-[24px] shadow-app border border-brand-main/20 p-5 space-y-3">
-                    <div class="flex items-start gap-4 p-3 border-b border-brand-light">
-                        <div class="w-8 h-8 rounded-full bg-brand-accent flex-shrink-0 flex items-center justify-center font-bold">1</div>
-                        <p class="text-sm">เลือกกลุ่มที่สนใจ แคปส่งให้ร้านได้เลย (หลายกลุ่มให้แคปทั้งหมด)</p>
-                    </div>
-                    <div class="flex items-start gap-4 p-3 border-b border-brand-light">
-                        <div class="w-8 h-8 rounded-full bg-brand-accent flex-shrink-0 flex items-center justify-center font-bold">2</div>
-                        <p class="text-sm">แจ้งรวมยอด และกดไปที่ลิ้งค์ชำระเงินด้านล่าง</p>
-                    </div>
-                    <a href="https://bibimintpay.samneang9894.workers.dev/" target="_blank" class="block w-full py-3 bg-brand-light border-2 border-dashed border-brand-main text-brand-main text-center rounded-xl font-bold text-xs">
-                        ลิ้งค์สำหรับชำระเงิน <i class="fa-solid fa-link ml-1"></i>
-                    </a>
-                    <div class="flex items-start gap-4 p-3 border-b border-brand-light">
-                        <div class="w-8 h-8 rounded-full bg-brand-accent flex-shrink-0 flex items-center justify-center font-bold">3</div>
-                        <p class="text-sm">ส่งสลิป และ Qr / Id / Link ไลน์ที่จะใช้เข้ากลุ่ม</p>
-                    </div>
-                    <div class="flex items-start gap-4 p-3 bg-brand-light rounded-xl">
-                        <div class="w-8 h-8 rounded-full bg-brand-main text-white flex-shrink-0 flex items-center justify-center font-bold">4</div>
-                        <p class="text-sm font-bold">รอมิ้นดึงเข้ากลุ่มภายใน 3-10 นาที</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div id="page-course" class="page">
-            <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
-                <div class="text-center z-10 relative">
-                    <h1 class="text-2xl font-bold text-white flex justify-center items-center gap-2">
-                        ขั้นตอนการรันบอท <i class="fa-solid fa-robot text-brand-accent"></i>
-                    </h1>
-                </div>
-            </div>
-            <div class="px-5 -mt-10 relative z-10 pb-8 space-y-4">
-                <div class="bg-white rounded-[24px] shadow-app border border-brand-main/20 p-6">
-                    <div class="space-y-4">
-                        <div class="p-3 bg-brand-light border-l-4 border-brand-main rounded-r-lg">
-                            <h4 class="font-bold text-xs text-brand-main mb-1">1. สังเกตุจุดประกาศ</h4>
-                            <p class="text-[11px]">สิ่งสำคัญที่ต้องดูคือ กฎ/กด และ เมล ของแต่ละกลุ่ม</p>
-                        </div>
-                        <div class="p-3 bg-brand-accent/10 border-l-4 border-brand-accent rounded-r-lg">
-                            <h4 class="font-bold text-xs text-brand-text mb-1">2. เริ่มรันบอท</h4>
-                            <p class="text-[11px]">พิมพ์หน้าห้องทีละคำ ห้ามพิมพ์รวม! <br>ตัวอย่าง: <span class="font-bold">กดเมล❌ กด✅ เมล✅</span></p>
-                        </div>
-                        <div class="p-3 border border-brand-main/20 rounded-xl">
-                            <h4 class="font-bold text-xs mb-1">3. อ่านกฎให้ละเอียด</h4>
-                            <p class="text-[11px] text-red-500 font-bold">สำคัญ: หากอ่านไม่จบอาจพลาดส่วนสำคัญของการโดนดึงเมล</p>
-                        </div>
-                        <div class="p-3 bg-brand-light border-l-4 border-brand-main rounded-r-lg">
-                            <h4 class="font-bold text-xs text-brand-main mb-1">4. การลงเมล</h4>
-                            <p class="text-[11px]">รันบอทเสร็จ เข้าไปที่โน๊ต เลื่อนหาโพสต์จัดเมล <br><span class="text-brand-text font-bold uppercase">ต้องเป็น @gmail.com เท่านั้น</span></p>
-                        </div>
-                        <div class="p-3 bg-brand-accent/10 border-l-4 border-brand-accent rounded-r-lg">
-                            <h4 class="font-bold text-xs text-brand-text mb-1">5. การแท็กแอดมิน</h4>
-                            <p class="text-[11px]">บางกลุ่มมีคีย์เวิร์ดแท็กเรียกแอดมิน ให้อ่านกฎในกลุ่มนั้นๆ ให้ละเอียดค่ะ</p>
-                        </div>
-                    </div>
-                    <div class="mt-4 p-3 bg-red-50 text-red-600 rounded-xl text-center text-[10px] font-bold border border-red-200">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> ทำผิด ไม่โดนดึงเมล ให้ย้อนกลับไปอ่านใหม่ทั้งหมดนะคะ
-                    </div>
-                </div>
-            </div>
-        </div>
+            <div class="px-5 -mt-10 relative z-10 pb-8 space-y-6">
+                <div class="neon-border">
+                    <div class="neon-content p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-2 text-brand-main font-bold border-b pb-2">
+                                <i class="fa-solid fa-star"></i>
+                                <span>กฎการผ่อน (โปรดอ่านให้ละเอียด)</span>
+                            </div>
+                            
+                            <div class="text-[11px] leading-relaxed space-y-3 text-brand-subtext">
+                                <p class="flex items-center gap-2">💎 <strong>เปิดบิลผ่อน:</strong> ไม่มีขั้นต่ำ ส่งยอดได้เรื่อยๆ ไม่จำกัดเวลา</p>
+                                
+                                <div class="bg-red-50 p-3 rounded-lg border border-red-100">
+                                    <p class="text-red-600 font-bold mb-1 underline">ข้อที่สำคัญที่สุด:</p>
+                                    <p class="text-red-500 font-medium italic">"ยกเลิกผ่อนไม่คืนเงินทุกกรณี ตัดสินใจให้ดีก่อนเปิดผ่อน"</p>
+                                </div>
 
-        <div id="page-contact" class="page">
-            <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
-                <div class="text-center z-10 relative">
-                    <h1 class="text-2xl font-bold text-white flex justify-center items-center gap-2">
-                        กฎการผ่อน & ติดต่อ <i class="fa-solid fa-comments text-brand-accent"></i>
-                    </h1>
+                                <p class="pl-2">⚠️ <strong>การตามยอด:</strong> มิ้นไม่ตามยอดนะคะ แต่หากขาดส่งนานถึง 3 เดือน ไม่มีการติดต่อใดๆมา ทักไปไม่ตอบ จะยึดยอดทันที</p>
+                                
+                                <p class="pl-2">📈 <strong>ราคา:</strong> บางกลุ่มอาจจะมีการอัพราคาขึ้น โปรดติดตามส่วนนี้ด้วย และโปรดรับผิดชอบตัวเองด้วยนะคะ</p>
+                                
+                                <p class="pl-2">✅ <strong>การเข้ากลุ่ม:</strong> ผ่อนครบ = ดึงเข้ากลุ่มเท่านั้น</p>
+
+                                <div class="bg-brand-light p-3 rounded-lg border border-brand-main/20 text-brand-text font-medium">
+                                    💡 ในกรณีผ่อนหลายกลุ่ม หากยอดพอที่จะเข้ากลุ่มใดกลุ่มนึงได้ สามารถแจ้งเข้าก่อนได้เลย
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="px-5 -mt-10 relative z-10 pb-8 space-y-4">
-                <div class="bg-white rounded-[24px] shadow-app border border-brand-main/20 p-5">
-                    <h3 class="text-sm font-bold text-brand-text mb-3"><i class="fa-solid fa-percent mr-2 text-brand-main"></i> กฎการผ่อนสินค้า</h3>
-                    <ul class="text-[11px] text-brand-subtext space-y-2">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-main"></i> เริ่มต้นผ่อนเพียง 20.- เท่านั้น</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-main"></i> ผ่อนครบรับลิงก์เข้ากลุ่มทันที</li>
-                        <li class="flex items-center gap-2 text-red-500 font-bold"><i class="fa-solid fa-circle-xmark"></i> ยกเลิกการผ่อน ไม่คืนเงินทุกกรณี</li>
-                    </ul>
-                </div>
-            
-                <div class="bg-white rounded-[24px] shadow-app border border-brand-main/20 p-8 flex justify-center gap-10">
+
+                <div class="bg-white rounded-3xl shadow-app p-8 flex justify-center gap-10 relative overflow-hidden">
+                    <div class="sticker float-anim -bottom-2 -left-2 text-2xl">🍭</div>
                     <a href="https://www.facebook.com/share/18Zypm3fJr/?mibextid=wwXIfr" target="_blank" class="flex flex-col items-center gap-2 group">
-                        <div class="w-16 h-16 rounded-full bg-brand-light flex items-center justify-center text-3xl text-brand-main group-hover:bg-brand-main group-hover:text-white transition-all shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-brand-light flex items-center justify-center text-3xl text-brand-main group-hover:scale-110 transition-transform shadow-sm">
                             <i class="fa-brands fa-facebook"></i>
                         </div>
-                        <span class="text-xs font-bold">Facebook</span>
+                        <span class="text-xs font-bold uppercase tracking-widest">FB</span>
                     </a>
                     <a href="https://line.me/ti/p/jw6UMcatuR" target="_blank" class="flex flex-col items-center gap-2 group">
-                        <div class="w-16 h-16 rounded-full bg-brand-accent/20 flex items-center justify-center text-3xl text-brand-text group-hover:bg-brand-accent transition-all shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-brand-accent/20 flex items-center justify-center text-3xl text-brand-text group-hover:scale-110 transition-transform shadow-sm">
                             <i class="fa-brands fa-line"></i>
                         </div>
-                        <span class="text-xs font-bold">Line</span>
+                        <span class="text-xs font-bold uppercase tracking-widest">Line</span>
                     </a>
                 </div>
             </div>
