@@ -19,12 +19,8 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#0284c7',     /* ฟ้าเข้ม */
-                            main: '#38bdf8',     /* ฟ้าสว่าง */
-                            light: '#f0f9ff',    /* ฟ้าอ่อนมาก */
-                            yellow: '#fde047',   /* เหลือง */
-                            text: '#0c4a6e',     
-                            subtext: '#334155'   
+                            dark: '#0284c7', main: '#38bdf8', light: '#f0f9ff',
+                            yellow: '#fde047', text: '#0c4a6e', subtext: '#334155'
                         }
                     }
                 }
@@ -37,13 +33,11 @@
             max-width: 430px; margin: 0 auto; min-height: 100vh;
             background-color: #f0f9ff; position: relative;
             box-shadow: 0 0 20px rgba(0,0,0,0.05); overflow-x: hidden;
-            /* ตกแต่งพื้นหลังหลัก */
             background-image: 
                 radial-gradient(at 0% 0%, rgba(253, 224, 71, 0.15) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.15) 0px, transparent 50%);
         }
         
-        /* ตกแต่งพื้นหลังฟุ้งๆ เพิ่มความสวยงาม */
         .bg-blob {
             position: absolute; width: 300px; height: 300px;
             background: rgba(56, 189, 248, 0.1); border-radius: 50%;
@@ -52,7 +46,7 @@
 
         .gradient-bg { background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 100%); }
         
-        /* กรอบไฟวนรอบช้าๆ */
+        /* กรอบไฟกระพริบช้าๆ */
         .neon-border {
             position: relative; border-radius: 20px; padding: 3px;
             background: linear-gradient(90deg, #38bdf8, #fde047, #38bdf8, #fde047);
@@ -65,13 +59,36 @@
         }
         .neon-inner { background: white; border-radius: 17px; padding: 15px; height: 100%; position: relative; z-index: 1; }
 
+        /* การตกแต่งรอบรูปโปรไฟล์ */
+        .profile-glow {
+            position: relative;
+        }
+        .profile-glow::after {
+            content: '✨'; position: absolute; top: -10px; right: -10px; font-size: 24px; animation: bounce 2s infinite;
+        }
+        .profile-glow::before {
+            content: '☁️'; position: absolute; bottom: 0; left: -20px; font-size: 20px; animation: bounce 3s infinite;
+        }
+
         .hero-image-placeholder {
             width: 190px; height: 190px; background-color: white;
             border-radius: 50%; border: 4px solid #fde047;
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 20px rgba(253, 224, 71, 0.6);
             margin: 0 auto; position: relative; z-index: 20;
             display: flex; align-items: center; justify-content: center; overflow: hidden;
+            animation: pulse-glow 3s infinite;
         }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(253, 224, 71, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.6); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         .page { display: none; animation: fadeIn 0.3s ease-out forwards; padding-bottom: 90px; position: relative; z-index: 1; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -88,32 +105,38 @@
                 <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
                 
                 <div class="flex justify-between items-center mb-6 relative z-10">
-                    <div class="text-white font-outfit text-2xl font-bold tracking-wide flex flex-col">
-                        BIBIMINTSHOP 🍯
+                    <div class="text-white font-outfit text-2xl font-bold tracking-wide flex flex-col relative">
+                        <span class="relative">
+                            BIBIMINTSHOP 🍯
+                            <span class="absolute -top-4 -right-6 text-sm animate-pulse">⭐</span>
+                        </span>
                         <span class="text-xs font-medium tracking-widest text-brand-yellow mt-1 uppercase">Group & Decorations</span>
                     </div>
-                    <div class="relative bg-white/20 p-2 rounded-full backdrop-blur-sm">
+                    <div class="relative bg-white/20 p-2 rounded-full backdrop-blur-sm border border-white/30">
                         <i class="fa-regular fa-bell text-white text-xl"></i>
-                        <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-brand-yellow rounded-full border-2 border-brand-main"></span>
+                        <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-brand-yellow rounded-full border-2 border-brand-main animate-ping"></span>
                     </div>
                 </div>
                 
                 <div class="text-center mb-2 z-10 relative text-white">
                     <h1 class="text-lg font-semibold flex justify-center items-center gap-2">
-                        Welcome to my shop ☁️
+                         🌈 Welcome to my shop ☁️
                     </h1>
-                    <p class="text-sm font-medium text-white/90 mt-1">แหล่งรวมกลุ่มป้าย และคอร์สสอนต่างๆ</p>
+                    <p class="text-sm font-medium text-white/90 mt-1 px-4 py-1 bg-black/10 rounded-full inline-block">แหล่งรวมกลุ่มป้าย และคอร์สสอนต่างๆ</p>
                 </div>
                 
-                <div class="hero-image-placeholder mt-4 mb-[-80px]">
-                    <img src="IMG_4975.png" alt="Bibimintshop Logo" class="w-full h-full object-cover">
+                <div class="profile-glow">
+                    <div class="hero-image-placeholder mt-4 mb-[-80px]">
+                        <img src="IMG_4975.png" alt="Bibimintshop Logo" class="w-full h-full object-cover">
+                    </div>
                 </div>
             </div>
 
             <div class="bg-white/60 backdrop-blur-md rounded-t-[35px] -mt-16 relative z-10 pt-10 px-5 pb-6">
                 
                 <div class="mb-6 mt-12 px-2">
-                    <div class="border-2 border-brand-main bg-white/80 rounded-xl p-4 flex items-center justify-between shadow-sm">
+                    <div class="border-2 border-brand-main bg-white/80 rounded-xl p-4 flex items-center justify-between shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-yellow to-transparent opacity-50 animate-pulse"></div>
                         <div class="flex items-center gap-3">
                             <div class="relative">
                                 <div class="w-3 h-3 bg-green-500 rounded-full"></div>
@@ -121,34 +144,34 @@
                             </div>
                             <span class="text-sm font-bold text-brand-text">สถานะเปิดร้าน : มิ้นพร้อมตอบค่ะ 🌻</span>
                         </div>
-                        <i class="fa-solid fa-store text-brand-main"></i>
+                        <i class="fa-solid fa-store text-brand-main text-xl"></i>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-4 gap-3 mb-8">
                     <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-website', 1)">
-                        <div class="w-14 h-14 rounded-full bg-white group-hover:bg-brand-yellow flex items-center justify-center text-brand-main group-hover:text-brand-text text-xl shadow-md border border-brand-main/10 transition-all">
+                        <div class="w-14 h-14 rounded-full bg-white group-hover:bg-brand-yellow flex items-center justify-center text-brand-main group-hover:text-brand-text text-xl shadow-md border border-brand-main/10 transition-all transform group-hover:scale-110">
                             <i class="fa-solid fa-images"></i>
                         </div>
-                        <span class="text-[10px] text-center font-medium">กลุ่มป้าย</span>
+                        <span class="text-[10px] text-center font-medium">กลุ่มป้าย 🖼️</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-goodnotes', 2)">
-                        <div class="w-14 h-14 rounded-full bg-white group-hover:bg-brand-yellow flex items-center justify-center text-brand-yellow text-xl shadow-md border border-brand-yellow/30 transition-all">
+                        <div class="w-14 h-14 rounded-full bg-white group-hover:bg-brand-yellow flex items-center justify-center text-brand-yellow text-xl shadow-md border border-brand-yellow/30 transition-all transform group-hover:scale-110">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </div>
-                        <span class="text-[10px] text-center font-medium">วิธีสั่งซื้อ</span>
+                        <span class="text-[10px] text-center font-medium">วิธีสั่งซื้อ 🛍️</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-course', -1)">
-                        <div class="w-14 h-14 rounded-full bg-white group-hover:bg-brand-yellow flex items-center justify-center text-brand-main group-hover:text-brand-text text-xl shadow-md border border-brand-main/10 transition-all">
+                        <div class="w-14 h-14 rounded-full bg-white group-hover:bg-brand-yellow flex items-center justify-center text-brand-main group-hover:text-brand-text text-xl shadow-md border border-brand-main/10 transition-all transform group-hover:scale-110">
                             <i class="fa-solid fa-robot"></i>
                         </div>
-                        <span class="text-[10px] text-center font-medium">วิธีรันบอท</span>
+                        <span class="text-[10px] text-center font-medium">วิธีรันบอท 🤖</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="switchTab('page-contact', 3)">
-                        <div class="w-14 h-14 rounded-full bg-white group-hover:bg-brand-yellow flex items-center justify-center text-brand-text text-xl shadow-md border border-brand-accent/30 transition-all">
+                        <div class="w-14 h-14 rounded-full bg-white group-hover:bg-brand-yellow flex items-center justify-center text-brand-text text-xl shadow-md border border-brand-accent/30 transition-all transform group-hover:scale-110">
                             <i class="fa-solid fa-percent"></i>
                         </div>
-                        <span class="text-[10px] text-center font-medium">กฎการผ่อน</span>
+                        <span class="text-[10px] text-center font-medium">กฎผ่อน 🧸</span>
                     </div>
                 </div>
 
@@ -156,7 +179,8 @@
                     <div class="neon-border">
                         <div class="neon-inner">
                             <div class="w-full flex items-center gap-2 text-left font-bold text-sm text-brand-text mb-2">
-                                <i class="fa-solid fa-circle-check text-brand-main"></i> สิ่งสำคัญที่ต้องมี
+                                <i class="fa-solid fa-star text-brand-yellow animate-spin-slow" style="animation: spin 5s linear infinite;"></i> 
+                                <span>สิ่งสำคัญที่ต้องมี ✨</span>
                             </div>
                             <div class="text-[13px] text-brand-subtext space-y-1 pl-6">
                                 <p>• ไลน์ (Line) สำหรับเข้ากลุ่ม</p>
@@ -171,15 +195,16 @@
         <div id="page-website" class="page">
             <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
                 <div class="text-center z-10 relative text-white">
-                    <h1 class="text-2xl font-bold flex justify-center items-center gap-2">ตัวอย่างกลุ่มป้าย 🖼️</h1>
+                    <h1 class="text-2xl font-bold flex justify-center items-center gap-2">ตัวอย่างกลุ่มป้าย 🖼️ ✨</h1>
                 </div>
             </div>
             <div class="px-5 -mt-10 relative z-10 pb-8 space-y-4">
                 <div class="bg-white/90 backdrop-blur-sm rounded-[24px] shadow-xl border border-white p-6 text-center">
-                    <span class="bg-brand-yellow px-3 py-1 rounded-full text-[10px] font-bold text-brand-text">START 5.-</span>
+                    <div class="text-xl mb-2">🎈 🎁 🎈</div>
+                    <span class="bg-brand-yellow px-3 py-1 rounded-full text-[10px] font-bold text-brand-text shadow-sm">START 5.-</span>
                     <h3 class="text-lg font-bold text-brand-text mt-3 mb-1">ราคาเริ่มต้น 5 - 2000 บาท</h3>
                     <p class="text-xs text-brand-subtext mb-4">เลือกดูตัวอย่างกลุ่มที่ลิ้งค์ด้านล่างได้เลยค่ะ ✨</p>
-                    <a href="https://linkbio.co/bibimintshop" target="_blank" class="w-full bg-brand-main text-white font-bold py-3 rounded-xl shadow-lg flex items-center justify-center gap-2">
+                    <a href="https://linkbio.co/bibimintshop" target="_blank" class="w-full bg-brand-main text-white font-bold py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 animate-bounce">
                         <i class="fa-solid fa-link"></i> จิ้มส่องตัวอย่างกลุ่มป้าย
                     </a>
                 </div>
@@ -188,30 +213,30 @@
 
         <div id="page-goodnotes" class="page">
             <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
-                <h1 class="text-2xl font-bold text-white text-center">ขั้นตอนการสั่งซื้อ 🛒</h1>
+                <h1 class="text-2xl font-bold text-white text-center">ขั้นตอนการสั่งซื้อ 🛒 🛍️</h1>
             </div>
             <div class="px-5 -mt-10">
                 <div class="bg-white/90 backdrop-blur-sm rounded-[24px] shadow-xl p-5 text-xs space-y-3 border border-white">
-                    <p>1. เลือกกลุ่มที่สนใจ แคปส่งให้ร้านได้เลย</p>
-                    <p>2. แจ้งรวมยอด (หากมีหลายกลุ่มรบกวนแคปทั้งหมด)</p>
-                    <p>3. หลังรวมยอด กดไปที่ลิ้งค์ชำระเงิน :</p>
-                    <a href="https://bibimintpay.samneang9894.workers.dev/" target="_blank" class="block bg-brand-yellow/10 border border-brand-yellow p-2 rounded text-center font-bold">👉 ลิ้งค์ชำระเงินคลิกที่นี่</a>
-                    <p>4. ดูยอดที่ร้านแจ้ง และโอนตามจำนวน ส่งสลิป และข้อมูลติดต่อ</p>
-                    <p class="font-bold text-brand-dark">5. รอมิ้นดึงเข้ากลุ่มภายใน 3-10 นาที ⏳</p>
+                    <p>✨ 1. เลือกกลุ่มที่สนใจ แคปส่งให้ร้านได้เลย</p>
+                    <p>✨ 2. แจ้งรวมยอด (หากมีหลายกลุ่มรบกวนแคปทั้งหมด)</p>
+                    <p>✨ 3. หลังรวมยอด กดไปที่ลิ้งค์ชำระเงิน :</p>
+                    <a href="https://bibimintpay.samneang9894.workers.dev/" target="_blank" class="block bg-brand-yellow/20 border border-brand-yellow p-2 rounded text-center font-bold">👉 ลิ้งค์ชำระเงินคลิกที่นี่</a>
+                    <p>✨ 4. ดูยอดที่ร้านแจ้ง และโอนตามจำนวน ส่งสลิป และข้อมูลติดต่อ</p>
+                    <p class="font-bold text-brand-dark">✨ 5. รอมิ้นดึงเข้ากลุ่มภายใน 3-10 นาที ⏳</p>
                 </div>
             </div>
         </div>
 
         <div id="page-course" class="page">
             <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
-                <h1 class="text-2xl font-bold text-white text-center">ขั้นตอนการรันบอท 🤖</h1>
+                <h1 class="text-2xl font-bold text-white text-center">ขั้นตอนการรันบอท 🤖 ⚙️</h1>
             </div>
             <div class="px-5 -mt-10">
                 <div class="bg-white/90 backdrop-blur-sm rounded-[24px] shadow-xl p-6 text-[11px] leading-relaxed space-y-3 border border-white">
-                    <p><strong>1. สังเกตุจุดประกาศ :</strong> มี กฎ/กด และ เมล</p>
-                    <p><strong>2. รันบอท :</strong> พิมพ์หน้าห้องทีละคำ <span class="text-red-500 font-bold">ห้ามพิมพ์รวบ!</span></p>
-                    <p><strong>3. อ่านกฎ :</strong> สำคัญมาก ห้ามข้ามนะคะ</p>
-                    <p><strong>4. ลงเมล :</strong> Gmail.com เท่านั้นในจุดที่แอดมินจัดไว้</p>
+                    <p><strong>1. สังเกตุจุดประกาศ :</strong> มี กฎ/กด และ เมล 📢</p>
+                    <p><strong>2. รันบอท :</strong> พิมพ์หน้าห้องทีละคำ <span class="text-red-500 font-bold">ห้ามพิมพ์รวบ!</span> ⌨️</p>
+                    <p><strong>3. อ่านกฎ :</strong> สำคัญมาก ห้ามข้ามนะคะ 📖</p>
+                    <p><strong>4. ลงเมล :</strong> Gmail.com เท่านั้นในจุดที่แอดมินจัดไว้ 📧</p>
                     <div class="p-3 bg-red-50 text-red-600 rounded-lg border border-red-100 font-bold text-center">
                         ⚠️ ทำผิดขั้นตอน ให้ย้อนกลับไปอ่านใหม่ทั้งหมดอีกรอบนะคะ
                     </div>
@@ -221,22 +246,22 @@
 
         <div id="page-contact" class="page">
             <div class="gradient-bg pt-10 px-6 pb-20 relative rounded-b-[40px]">
-                <h1 class="text-2xl font-bold text-white text-center">กฎการผ่อนกลุ่ม 🧸</h1>
+                <h1 class="text-2xl font-bold text-white text-center">กฎการผ่อนกลุ่ม 🧸 🎀</h1>
             </div>
             <div class="px-5 -mt-10 space-y-4">
                 <div class="neon-border">
                     <div class="neon-inner text-[11px] space-y-3 text-brand-subtext">
                         <p>🌸 <strong>เปิดบิลผ่อน:</strong> ไม่มีขั้นต่ำ ส่งยอดได้เรื่อยๆ</p>
                         <p class="text-red-500 font-bold underline">⚠️ ยกเลิกผ่อนไม่คืนเงินทุกกรณี ตัดสินใจให้ดีก่อนค่ะ</p>
-                        <p>• ขาดส่งนาน 3 เดือน ไม่ติดต่อมา = ยึดยอดทันที</p>
-                        <p>• <strong>ผ่อนครบ = ดึงเข้ากลุ่มเท่านั้น</strong></p>
+                        <p>🍭 ขาดส่งนาน 3 เดือน ไม่ติดต่อมา = ยึดยอดทันที</p>
+                        <p>🍭 <strong>ผ่อนครบ = ดึงเข้ากลุ่มเท่านั้น</strong></p>
                         <p class="bg-brand-light p-2 rounded">💡 ผ่อนหลายกลุ่ม ยอดพอเข้ากลุ่มไหน แจ้งได้เลยค่ะ</p>
                     </div>
                 </div>
 
                 <div class="bg-white/80 rounded-3xl p-6 shadow-app flex justify-center gap-10">
-                    <a href="https://www.facebook.com/share/18Zypm3fJr/?mibextid=wwXIfr" target="_blank" class="flex flex-col items-center gap-2"><i class="fa-brands fa-facebook text-3xl text-brand-dark"></i><span class="text-[10px]">Facebook</span></a>
-                    <a href="https://line.me/ti/p/jw6UMcatuR" target="_blank" class="flex flex-col items-center gap-2"><i class="fa-brands fa-line text-3xl text-green-500"></i><span class="text-[10px]">Line</span></a>
+                    <a href="https://www.facebook.com/share/18Zypm3fJr/?mibextid=wwXIfr" target="_blank" class="flex flex-col items-center gap-2 transform transition-transform hover:scale-125"><i class="fa-brands fa-facebook text-3xl text-brand-dark"></i><span class="text-[10px]">Facebook</span></a>
+                    <a href="https://line.me/ti/p/jw6UMcatuR" target="_blank" class="flex flex-col items-center gap-2 transform transition-transform hover:scale-125"><i class="fa-brands fa-line text-3xl text-green-500"></i><span class="text-[10px]">Line</span></a>
                 </div>
             </div>
         </div>
@@ -278,8 +303,13 @@
             for (let i = 0; i <= 3; i++) {
                 const item = document.getElementById(`nav-item-${i}`);
                 if (item) {
-                    item.classList.remove('text-brand-main', 'text-brand-subtext');
-                    item.classList.add(i === navIndex ? 'text-brand-main' : 'text-brand-subtext');
+                    if (i === navIndex) {
+                        item.classList.remove('text-brand-subtext');
+                        item.classList.add('text-brand-main');
+                    } else {
+                        item.classList.remove('text-brand-main');
+                        item.classList.add('text-brand-subtext');
+                    }
                 }
             }
         }
